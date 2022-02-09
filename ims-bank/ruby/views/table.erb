@@ -1,1 +1,22 @@
-<p>Replace this with your summary table</p>
+<h1 style="text-align: center;">Accounts List</h1>
+<table  class="table table-sm table-striped ml-4" style="max-width: 100rem;">
+	<thead>
+
+  <tr>
+    <th scope="col"><%= "Customer's name"%> </th>
+    <th scope="col"> <%= "Total of checking accounts"%> </th>
+    <th scope="col"><%= "Total of savings accounts"%> </th>
+    <th scope="col"><%= "Total of all accounts"%> </th>
+  </tr>
+</thead>
+<tbody>
+<% @accounts.each do |key, value| %>
+  <tr>
+    <td scope="row"><%= value['name'] %></td>
+    <td scope="row"><%= "$#{value['total_checking'].round(2)}" %></td>
+    <td scope="row"><%= "$#{value['total_saving'].round(2)}" %></td>
+    <td scope="row"><%= "$#{(value['total_saving'] + value['total_checking'] + value['remaining']).round(2)}"%></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
