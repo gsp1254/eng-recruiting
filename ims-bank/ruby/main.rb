@@ -17,7 +17,9 @@ get '/' do
   @accounts = {}
   transactions.each do |t|
     if !@accounts.keys.include?(t['customer_id'])
-      @accounts[t['customer_id']] = {"name" => t['customer_name'], 'total_saving' => 0.0, 'total_checking' => 0.0, 'remaining' => 0.0} 
+      @accounts[t['customer_id']] = {'name' => t['customer_name'], 'total_saving' => 0.0, 'total_checking' => 0.0, 'remaining' => 0.0} 
+    else
+      @accounts[t['customer_id']]['name'] ||= t['customer_name']
     end
     if t['account_type'] == 'savings'
       @accounts[t['customer_id']]['total_saving'] += t['transaction_amount'][1..-1].to_f 
